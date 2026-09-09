@@ -75,4 +75,4 @@ MIT. Source fully open, that's the actual trust story here, not a marketing clai
 
 ## Tags
 
-mcp, model-context-protocol, ai-agent-tools, deterministic-computation, llm-tools, ai-coding-assistant, vibe-coding, claude-mcp, cursor-mcp, local-first, offline-tools, developer-utilities, no-hallucination, exact-math, subnet-calculator, cron-parser, date-math, unit-converter, base64, jwt-decoder, uuid-generator
+mcp, model-context-protocol, mcp-server, ai-agents, developer-tools, deterministic-computation, llm-tools, vibe-coding, local-first, offline-first, no-hallucination, exact-math, subnet-calculator, cron-parser, date-math, unit-converter, base64, jwt-decoder, uuid-generator
