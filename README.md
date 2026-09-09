@@ -67,7 +67,7 @@ node src/index.js   # run the server directly (waits on stdin)
 
 ## License
 
-MIT. Source fully open, that's the actual trust story here, not a marketing claim.
+MIT.
 
 ## Pro features
 
