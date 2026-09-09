@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 'use strict';
 
-// polymath-megablaster-mcp: local developer toolkit with deterministic tools for AI agents, exposed as MCP tools.
+// polymath-megablaster-mcp: local deterministic-computation MCP server for AI agents.
+// v3: scoped down to computation only — exact math, dates, units, stats, networking
+// math — after auditing that commodity dev-utilities (JSON/JWT/hash/cron/etc.)
+// were already covered by larger existing bundles. See
+// MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md for the competitor research behind this.
 // No network calls, no telemetry, no API keys. Fully open source, all tools free.
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -38,61 +42,7 @@ tool('check_ip_type', 'Check if an IPv4 address is private/reserved and identify
   ip: z.string().describe('IPv4 address, e.g. "192.168.1.1"'),
 }, ({ ip }) => t.checkIpType(ip));
 
-tool('format_json', 'Pretty-print or minify a JSON string', {
-  json: z.string().describe('Raw JSON text'),
-  mode: z.enum(['pretty', 'minify']).optional().describe('Output mode, default pretty'),
-}, ({ json, mode }) => t.formatJson(json, mode));
-
-tool('decode_jwt', 'Decode a JWT (header + payload + expiry check) without verifying the signature', {
-  token: z.string().describe('JWT string (three dot-separated base64url parts)'),
-}, ({ token }) => t.decodeJwt(token));
-
-tool('base64_encode', 'Encode text as base64', {
-  text: z.string(),
-}, ({ text: input }) => ({ base64: t.base64Encode(input) }));
-
-tool('base64_decode', 'Decode a base64 string to text', {
-  base64: z.string(),
-}, ({ base64 }) => ({ text: t.base64Decode(base64) }));
-
-tool('hash_text', 'Compute a hash digest of text (md5, sha1, sha256, sha384, sha512)', {
-  text: z.string(),
-  algo: z.enum(['md5', 'sha1', 'sha256', 'sha384', 'sha512']).optional(),
-}, ({ text: input, algo }) => ({ algo: algo || 'sha256', digest: t.hashText(input, algo) }));
-
-tool('parse_cron', 'Parse a 5-field cron expression and compute the next N run times', {
-  expression: z.string().describe('Cron expression, e.g. "*/15 9-17 * * 1-5"'),
-  count: z.number().int().min(1).max(50).optional().describe('Number of future run times to return, default 5'),
-}, ({ expression, count }) => t.parseCron(expression, count));
-
-tool('generate_uuid', 'Generate one or more random UUID v4 values', {
-  count: z.number().int().min(1).max(100).optional().describe('How many UUIDs to generate, default 1'),
-}, ({ count }) => ({ uuids: t.generateUuid(count) }));
-
-tool('convert_timestamp', 'Convert a Unix timestamp (seconds or ms) to ISO 8601, or get the current time if omitted', {
-  timestamp: z.union([z.string(), z.number()]).optional(),
-}, ({ timestamp }) => t.convertTimestamp(timestamp));
-
-tool('parse_date', 'Parse a human/ISO date string into ISO 8601 and Unix timestamp forms', {
-  date: z.string().describe('Date string, e.g. "2026-01-01" or "Jan 1 2026"'),
-}, ({ date }) => t.parseDateString(date));
-
-tool('convert_color', 'Convert a color between hex, rgb(), and hsl() formats', {
-  color: z.string().describe('Color in hex (#rrggbb), rgb(r,g,b), or hsl(h,s%,l%) form'),
-}, ({ color }) => t.convertColor(color));
-
-tool('diff_text', 'Line-by-line diff of two text blocks, returning added/removed/unchanged lines', {
-  a: z.string().describe('Original text'),
-  b: z.string().describe('Modified text'),
-}, ({ a, b }) => t.diffText(a, b));
-
-tool('convert_config_format', 'Convert config data between JSON, YAML, and TOML', {
-  input: z.string(),
-  from: z.enum(['json', 'yaml', 'yml', 'toml']),
-  to: z.enum(['json', 'yaml', 'yml', 'toml']),
-}, ({ input, from, to }) => ({ output: t.convertConfigFormat(input, from, to) }));
-
-// ===== FREE TIER: computation (fixes documented LLM weak spots) =====
+// ===== computation (fixes documented LLM weak spots) =====
 
 tool('calculate', 'Evaluate an arbitrary-precision math expression exactly (fixes LLM multi-digit arithmetic errors). Supports +,-,*,/,^,sqrt(),sin(),log(), etc.', {
   expression: z.string().describe('Math expression, e.g. "123456789 * 987654321" or "sqrt(2)^10"'),

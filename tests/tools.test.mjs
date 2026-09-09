@@ -30,60 +30,9 @@ eq(r.isPrivate, false, 'boundary just outside 172.16/12 is public');
 r = t.checkIpType('8.8.8.8');
 eq(r.isPrivate, false, 'public IP detection');
 
-// JSON / JWT / encoding / hashing
-eq(t.formatJson('{"a":1}'), JSON.stringify({ a: 1 }, null, 2), 'json format pretty');
-eq(t.formatJson('{"a": 1}', 'minify'), '{"a":1}', 'json format minify');
-
-const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
-r = t.decodeJwt(jwt);
-eq(r.header.alg, 'HS256', 'jwt header');
-eq(r.payload.name, 'John Doe', 'jwt payload');
-
-eq(t.base64Encode('hello world'), 'aGVsbG8gd29ybGQ=', 'base64 encode');
-eq(t.base64Decode('aGVsbG8gd29ybGQ='), 'hello world', 'base64 decode');
-throws(() => t.base64Decode('not valid!!!'), 'base64 decode rejects garbage');
-
-eq(t.hashText('hello', 'sha256'), '2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824', 'sha256 known value');
-eq(t.hashText('hello', 'sha1'), 'aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d', 'sha1 known value');
-
-// Cron
-r = t.parseCron('*/15 9-17 * * 1-5', 3);
-eq(r.nextRuns.length, 3, 'cron returns requested run count');
-throws(() => t.parseCron('* * * *'), 'cron rejects wrong field count');
-throws(() => t.parseCron('99 * * * *'), 'cron rejects out-of-range minute');
-
-// UUID / timestamp / color
-const uuids = t.generateUuid(10);
-eq(uuids.length, 10, 'uuid batch count');
-ok(new Set(uuids).size === 10, 'uuid batch no duplicates');
-const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-ok(uuids.every(u => uuidRe.test(u)), 'uuid v4 format valid');
-
-r = t.convertTimestamp('1735689600');
-eq(r.iso, '2025-01-01T00:00:00.000Z', 'timestamp seconds known value');
-r = t.parseDateString('2026-01-01T00:00:00Z');
-eq(r.unixSeconds, 1767225600, 'date string to timestamp known value');
-
-r = t.convertColor('#4f8cff');
-eq(r.rgb, 'rgb(79, 140, 255)', 'color hex to rgb');
-r = t.convertColor('rgb(255, 0, 0)');
-eq(r.hex, '#ff0000', 'color rgb to hex pure red');
-
-// Diff
-r = t.diffText('line1\nline2\nline3', 'line1\nlineX\nline3');
-eq(r.summary.added, 1, 'diff detects 1 added line');
-eq(r.summary.removed, 1, 'diff detects 1 removed line');
-eq(r.summary.unchanged, 2, 'diff detects 2 unchanged lines');
-
-// Config format conversion
-const jsonIn = '{"name":"test","port":8080}';
-const yamlOut = t.convertConfigFormat(jsonIn, 'json', 'yaml');
-ok(yamlOut.includes('name: test'), 'json to yaml conversion');
-const backToJson = t.convertConfigFormat(yamlOut, 'yaml', 'json');
-eq(JSON.parse(backToJson), JSON.parse(jsonIn), 'yaml round-trips back to same json data');
-
-const tomlOut = t.convertConfigFormat(jsonIn, 'json', 'toml');
-ok(tomlOut.includes('name = "test"') || tomlOut.includes("name = 'test'"), 'json to toml conversion');
+// JSON / JWT / encoding / hashing / cron / UUID / timestamp / color / diff / config-format
+// tests removed with the v2 scope audit (see MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md);
+// those tools were pulled from the free tier as commodity dev-utilities.
 
 // Calculator (arbitrary precision)
 r = t.calculate('123456789 * 987654321');

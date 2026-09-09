@@ -30,11 +30,8 @@ async function call(name, args, checkFn, label) {
 
 await call('calc_subnet', { cidr: '192.168.1.0/24' }, (t) => t.includes('192.168.1.255'), 'MCP call: calc_subnet broadcast');
 await call('check_ip_type', { ip: '10.0.0.1' }, (t) => t.includes('true'), 'MCP call: check_ip_type private');
-await call('format_json', { json: '{"a":1}' }, (t) => t.includes('"a": 1'), 'MCP call: format_json pretty');
-await call('generate_uuid', { count: 3 }, (t) => (t.match(/-/g) || []).length >= 12, 'MCP call: generate_uuid count 3');
-await call('hash_text', { text: 'hello', algo: 'sha256' }, (t) => t.includes('2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824'), 'MCP call: hash_text sha256');
-await call('convert_config_format', { input: '{"a":1}', from: 'json', to: 'yaml' }, (t) => t.includes('a: 1'), 'MCP call: convert_config_format json->yaml');
-await call('parse_cron', { expression: '0 0 * * *', count: 2 }, (t) => t.includes('nextRuns'), 'MCP call: parse_cron');
+// format_json / generate_uuid / hash_text / convert_config_format / parse_cron
+// MCP-layer tests removed with the v2 scope audit; those tools left the free tier.
 await call('calc_subnet', { cidr: 'not-an-ip' }, (t, isErr) => isErr, 'MCP call: calc_subnet bad input returns clean error');
 
 await call('calculate', { expression: '999999999999 * 999999999999' }, (t) => t.includes('999999999998000000000001'), 'MCP call: calculate large exact multiplication');
