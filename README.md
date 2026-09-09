@@ -1,18 +1,35 @@
 # Polymath MegaBlaster MCP
 
-A local MCP toolkit that gives AI agents deterministic calculation instead of guessing. 27 free tools: exact math, precise date/calendar arithmetic, unit conversion, hashing, encoding, networking, and more. 100% local, no network calls, no telemetry, no API keys. Fully open source.
+AI models are shockingly bad at math. Ask one to multiply two 9-digit numbers and it will confidently hand you a wrong answer with zero hesitation. Same story with dates ("what's 47 business days from now"), unit conversions, and a dozen other things a pocket calculator does perfectly and an LLM does by vibes.
 
-## The problem this solves
+This is a local toolkit of 27 free tools that gives AI agents a way to actually compute things instead of guessing. Deterministic in, deterministic out. 100% local, no network calls, no telemetry, no API keys. Fully open source.
 
-LLMs are known to get arithmetic, calendar math, and multi-digit calculations wrong when they compute "by reasoning" instead of by actual execution. Confident and wrong is worse than an error message. This toolkit gives an AI agent real deterministic functions to call instead, so answers about subnet math, dates, statistics, base conversion, and more come from actual code execution, not a guess dressed up as an answer.
+**Useful things it does:**
+- Does exact math on huge numbers without rounding errors
+- Figures out dates correctly, including leap years and "the last day of the month" edge cases everyone gets wrong
+- Converts between units (km/miles, C/F, kg/lb) without approximating
+- Works out subnet math for networking
+- Generates real random UUIDs instead of made-up-looking ones
+- Diffs two blocks of text and tells you exactly what changed
+
+**More technical things it does:**
+- Arbitrary-precision arithmetic, factorials, permutations, combinations (avoids float64 overflow)
+- Statistics (mean, median, stdev, variance, percentiles) on a list of numbers
+- Cron expression parsing with computed next-run times
+- JWT decoding, base64 encode/decode, hashing (md5/sha1/sha256/sha384/sha512)
+- Haversine great-circle distance between coordinates
+- JSON/YAML/TOML conversion
+- Token counting (GPT tokenizer) so an agent can manage its own context budget
 
 ## Why local
 
 Most AI dev tool MCP servers either charge a subscription or call out to a remote API. This one never touches the network. Every tool is pure local computation, verifiable in the source: read `src/tools.js`, there is no `fetch` or `http` import anywhere in it.
 
-## Install
+## Setup
 
-Clone this repo and run it directly:
+**1. Install Node.js** (v18 or newer) if you don't have it: https://nodejs.org
+
+**2. Clone this repo and install dependencies:**
 
 ```bash
 git clone https://github.com/headlessherm-creator/polymath-megablaster-mcp.git
@@ -20,7 +37,7 @@ cd polymath-megablaster-mcp
 npm install
 ```
 
-Then point your MCP client at the local path:
+**3. Point your MCP client at the local path:**
 
 ```json
 {
@@ -33,7 +50,10 @@ Then point your MCP client at the local path:
 }
 ```
 
-Add that to your MCP client's config (Claude Desktop, Cursor, etc.) and restart it.
+Add that to your MCP client's config and restart it. Setup docs for common clients:
+- Claude Desktop: https://modelcontextprotocol.io/quickstart/user
+- Cursor: https://docs.cursor.com/context/model-context-protocol
+- Claude Code: https://docs.claude.com/en/docs/claude-code/mcp
 
 ## Tools (27, all free)
 
@@ -56,6 +76,17 @@ Add that to your MCP client's config (Claude Desktop, Cursor, etc.) and restart 
   distance between coordinates)
 - **Agent utility**: `count_tokens` (GPT tokenizer, for managing context budget before
   a large prompt)
+
+## Dependencies
+
+- [`@modelcontextprotocol/sdk`](https://www.npmjs.com/package/@modelcontextprotocol/sdk): the MCP protocol implementation
+- [`zod`](https://www.npmjs.com/package/zod): input schema validation
+- [`mathjs`](https://www.npmjs.com/package/mathjs): arbitrary-precision math evaluation
+- [`gpt-tokenizer`](https://www.npmjs.com/package/gpt-tokenizer): GPT tokenizer for `count_tokens`
+- [`js-yaml`](https://www.npmjs.com/package/js-yaml): YAML parsing/serialization
+- [`smol-toml`](https://www.npmjs.com/package/smol-toml): TOML parsing/serialization
+
+All installed automatically by `npm install`. None of them make network calls at runtime.
 
 ## Development
 
