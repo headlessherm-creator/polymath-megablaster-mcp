@@ -1,7 +1,27 @@
 {
   "name": "polymath-megablaster-mcp",
   "version": "2.0.0",
-  "description": "Full-stack 100% local developer toolkit as an MCP server — networking, encoding, hashing, config formats, computation, and more. No network calls, no API keys, no telemetry. Fully open source.",
+  "description": "Local MCP toolkit giving AI agents deterministic calculation instead of guessing: exact math, date arithmetic, unit conversion, hashing, networking, and more. 100% local, no network calls, no API keys, no telemetry. Fully open source.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-agent-tools",
+    "deterministic-computation",
+    "llm-tools",
+    "ai-coding-assistant",
+    "vibe-coding",
+    "claude-mcp",
+    "cursor-mcp",
+    "local-first",
+    "offline-tools",
+    "developer-utilities",
+    "no-hallucination",
+    "exact-math",
+    "subnet-calculator",
+    "cron-parser",
+    "date-math",
+    "unit-converter"
+  ],
   "type": "module",
   "scripts": {
     "test": "node tests/tools.test.mjs && node tests/mcp.test.mjs",

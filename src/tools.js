@@ -1,6 +1,6 @@
-// Core logic — pure functions, no I/O, no network. Ported/adapted from the
+// Core logic. Pure functions, no I/O, no network. Ported/adapted from the
 // already-tested NetKit/DevKit/QuickUtils Chrome extension logic (same math,
-// same edge-case handling), plus new categories for the MCP full-stack scope.
+// same edge-case handling), plus new computation-focused categories.
 'use strict';
 
 import crypto from 'node:crypto';
@@ -8,7 +8,7 @@ import yaml from 'js-yaml';
 import * as toml from 'smol-toml';
 
 // ============================================================
-// NETWORKING (ported from NetKit — free tier, undercuts competitors who gate this)
+// NETWORKING (ported from NetKit, free tier, undercuts competitors who gate this)
 // ============================================================
 
 export function ipToInt(ip) {
@@ -316,7 +316,7 @@ export function convertColor(input) {
 // ============================================================
 
 export function diffText(a, b) {
-  // Simple line-based LCS diff — sufficient for config/text comparison, no deps.
+  // Simple line-based LCS diff, sufficient for config/text comparison, no deps.
   const linesA = a.split('\n');
   const linesB = b.split('\n');
   const m = linesA.length, n = linesB.length;
@@ -365,7 +365,7 @@ export function convertConfigFormat(input, fromFormat, toFormat) {
 
 import { create, all } from 'mathjs';
 const math = create(all, { number: 'BigNumber', precision: 64 });
-// mathjs's evaluate() is a sandboxed expression parser, NOT JS eval — it does not
+// mathjs's evaluate() is a sandboxed expression parser, NOT JS eval. It does not
 // execute arbitrary JS, only arithmetic/math-function syntax. Safe on untrusted input.
 
 export function calculate(expression) {
@@ -410,7 +410,7 @@ export function dateAdd(dateStr, amount, unit) {
     if (unit === 'months') result.setUTCMonth(result.getUTCMonth() + n);
     else result.setUTCFullYear(result.getUTCFullYear() + n);
     // JS date rollover doesn't clamp (e.g. Jan 31 + 1 month silently becomes
-    // Mar 3, not Feb 28) — detect overflow and clamp to the target month's
+    // Mar 3, not Feb 28). Detect overflow and clamp to the target month's
     // actual last day instead, matching normal calendar-math expectations.
     if (result.getUTCDate() !== originalDay) {
       result.setUTCDate(0); // rolls back to the last day of the previous (correct) month
@@ -578,7 +578,7 @@ function convertTemperature(v, fromLower, toLower) {
 }
 
 // ============================================================
-// NEW: Geographic distance (haversine — exact great-circle distance)
+// NEW: Geographic distance (haversine, exact great-circle distance)
 // ============================================================
 
 export function haversineDistance(lat1, lon1, lat2, lon2) {

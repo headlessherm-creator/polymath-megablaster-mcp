@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// polymath-megablaster-mcp — full-stack 100% local developer toolkit exposed as MCP tools.
+// polymath-megablaster-mcp: local developer toolkit with deterministic tools for AI agents, exposed as MCP tools.
 // No network calls, no telemetry, no API keys. Fully open source, all tools free.
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -28,7 +28,7 @@ function tool(name, description, schema, fn) {
   });
 }
 
-// ===== ALL TOOLS FREE — fully open source, nothing gated in code =====
+// ===== ALL TOOLS FREE, fully open source, nothing gated in code =====
 
 tool('calc_subnet', 'Calculate subnet details (network, broadcast, usable hosts, mask) from a CIDR like 192.168.1.0/24', {
   cidr: z.string().describe('IPv4 address or CIDR, e.g. "192.168.1.0/24"'),
@@ -98,7 +98,7 @@ tool('calculate', 'Evaluate an arbitrary-precision math expression exactly (fixe
   expression: z.string().describe('Math expression, e.g. "123456789 * 987654321" or "sqrt(2)^10"'),
 }, ({ expression }) => t.calculate(expression));
 
-tool('count_tokens', 'Count tokens in text using the GPT-3.5/4 (cl100k_base) tokenizer — useful for managing context budget before sending a large prompt', {
+tool('count_tokens', 'Count tokens in text using the GPT-3.5/4 (cl100k_base) tokenizer. Useful for managing context budget before sending a large prompt', {
   text: z.string(),
 }, ({ text: input }) => t.countTokens(input));
 
