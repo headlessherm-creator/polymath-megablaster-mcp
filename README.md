@@ -2,7 +2,7 @@
 
 AI models are bad at math, unit conversions, and a dozen other things a pocket calculator does perfectly.
 
-This is a local toolkit of 27 free tools that gives AI agents a way to offload the kinds of computations reasoning models generally do not do well. Deterministic in, deterministic out. 100% local, no network calls, no telemetry, no API keys. Fully open source.
+This is a local toolkit of 27 free tools that gives AI agents a way to offload the kinds of computations reasoning models generally do not do very well. Deterministic in, deterministic out. 100% local, no network calls, no telemetry, no API keys. Fully open source.
 
 **Useful things it does:**
 - Does exact math on huge numbers without rounding errors
