@@ -12,7 +12,7 @@ Most AI dev tool MCP servers either charge a subscription or call out to a remot
 
 ## Install
 
-**Note:** this package is not yet published to the npm registry, so `npx polymath-megablaster-mcp` will not work until that happens. The install method that works right now is running it from a local clone of this repo:
+Clone this repo and run it directly:
 
 ```bash
 git clone https://github.com/headlessherm-creator/polymath-megablaster-mcp.git
@@ -34,19 +34,6 @@ Then point your MCP client at the local path:
 ```
 
 Add that to your MCP client's config (Claude Desktop, Cursor, etc.) and restart it.
-
-**Once published to npm**, the simpler no-clone install will work instead:
-
-```json
-{
-  "mcpServers": {
-    "polymath": {
-      "command": "npx",
-      "args": ["-y", "polymath-megablaster-mcp"]
-    }
-  }
-}
-```
 
 ## Tools (27, all free)
 
@@ -70,10 +57,6 @@ Add that to your MCP client's config (Claude Desktop, Cursor, etc.) and restart 
 - **Agent utility**: `count_tokens` (GPT tokenizer, for managing context budget before
   a large prompt)
 
-## A note on the paid add-on
-
-There is a separate **Polymath MegaBlaster Pro** add-on (HMAC, semver compare, AES encrypt/decrypt) sold as a one-time paid unlock. It is not gated by a license key check in this code. A real code-based license check cannot work for a genuinely local, open-source tool: there is no server to verify against, and anyone can read the source and bypass it. Instead, the pro tools are a separate small package distributed only through the point of sale. The gate is the storefront, not the code. This repo has nothing to do with that gate; everything here is unconditionally free.
-
 ## Development
 
 ```
@@ -85,6 +68,10 @@ node src/index.js   # run the server directly (waits on stdin)
 ## License
 
 MIT. Source fully open, that's the actual trust story here, not a marketing claim.
+
+## Pro features
+
+4 additional tools (`hmac_text`, `compare_semver`, `aes_encrypt`, `aes_decrypt`) are available as a paid one-time unlock: **Polymath MegaBlaster Pro**. [Link to be added once the storefront is live.]
 
 ## Tags
 
