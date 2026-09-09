@@ -1,10 +1,8 @@
 # Polymath MegaBlaster MCP
 
-Polymath MegaBlaster is the calculator your Agent keeps in its back pocket.
+AI models are bad at math, unit conversions, and at least a dozen other things, Polymath MegaBlaster is the calculator your Agent keeps in its back pocket.
 
-AI models are bad at math, unit conversions, and a dozen other things a pocket calculator does perfectly.
-
-This is a local toolkit of 27 free tools that gives AI agents a way to offload the kinds of computations reasoning models generally do not do very well. Deterministic in, deterministic out. 100% local, no network calls, no telemetry, no API keys. Fully open source.
+This is a local toolkit of 27 free tools that gives AI agents a way to offload the kinds of computations reasoning models generally do not do very well. Deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source!
 
 **Useful things it does:**
 - Does exact math on huge numbers without rounding errors
