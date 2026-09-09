@@ -10,7 +10,30 @@ It also targets documented LLM weak spots directly — multi-digit arithmetic, c
 
 ## Install
 
-No install needed — run directly with `npx`:
+**Note:** this package is not yet published to the npm registry, so `npx polymath-megablaster-mcp` won't work until that happens. The install method that works right now is running it from a local clone of this repo:
+
+```bash
+git clone https://github.com/headlessherm-creator/polymath-megablaster-mcp.git
+cd polymath-megablaster-mcp
+npm install
+```
+
+Then point your MCP client at the local path:
+
+```json
+{
+  "mcpServers": {
+    "polymath": {
+      "command": "node",
+      "args": ["/absolute/path/to/polymath-megablaster-mcp/src/index.js"]
+    }
+  }
+}
+```
+
+Add that to your MCP client's config (Claude Desktop, etc.) and restart it.
+
+**Once published to npm**, the simpler no-clone install will work instead:
 
 ```json
 {
@@ -22,8 +45,6 @@ No install needed — run directly with `npx`:
   }
 }
 ```
-
-Add that to your MCP client's config (Claude Desktop, etc.) and restart it.
 
 ## Tools (27, all free)
 
