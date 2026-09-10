@@ -1,6 +1,6 @@
 # Polymath MegaBlaster MCP
 
-AI models are bad at math, unit conversions, and at least a dozen other things, Polymath MegaBlaster MCP is here to answer all your questions and be the solution to every single one of your problems.
+AI models are bad at math, unit conversions, and at least a dozen other things, Polymath MegaBlaster MCP blasts math, and is here to answer all your questions and be the solution to every single one of your problems.
 
 This is a local toolkit of 15 free tools that gives AI agents a way to offload the kinds of computations reasoning models generally do not do very well. Deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source!
 
