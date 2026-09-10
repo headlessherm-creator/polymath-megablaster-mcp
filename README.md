@@ -6,10 +6,10 @@ This is a local toolkit of 15 free tools that give AI agents a way to offload th
 
 **Useful things it does:**
 - Does exact math on huge numbers without rounding errors
-- Figures out dates correctly, including leap years and "the last day of the month" edge cases everyone gets wrong
+- Figures out dates correctly, including leap years and "the last day of the month" edge cases
 - Converts between units (km/miles, C/F, kg/lb) without approximating
 - Works out subnet math for networking
-- Computes distance between two coordinates (great-circle, not "as the crow roughly flies")
+- Computes distance between two coordinates (great-circle)
 
 **More technical things it does:**
 - Arbitrary-precision arithmetic, factorials, permutations, combinations (avoids float64 overflow)
