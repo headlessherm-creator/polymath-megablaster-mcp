@@ -1,6 +1,7 @@
 {
   "name": "polymath-megablaster-mcp",
-  "version": "3.0.0",
+  "version": "3.0.2",
+  "mcpName": "io.github.headlessherm-creator/polymath-megablaster-mcp",
   "description": "Local MCP toolkit giving AI agents deterministic calculation instead of guessing: exact math, date arithmetic, unit conversion, statistics, combinatorics, subnet math, and more. 100% local, no network calls, no API keys, no telemetry. Fully open source.",
   "keywords": [
     "mcp",
