@@ -4,8 +4,6 @@ AI models are bad at math, unit conversions, and at least a dozen other things, 
 
 This is a local toolkit of 15 free tools that give AI agents a way to offload the kinds of computations reasoning models generally do not perform very well, computations are offloaded onto a calculator that uses classical deterministic methods to ascertain needed values. Fully offline, deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source and built lean.
 
-Every tool here exists because it fixes a specific, repeatable way models get math, dates, units, or counts wrong. See [`MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md`](https://github.com/headlessherm-creator/polymath-megablaster-mcp/blob/main/MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md) in this repo for the competitor research behind that decision — plenty of MCP servers already do JSON formatting, JWT decoding, hashing, and cron parsing well, so we don't duplicate that here.
-
 **Useful things it does:**
 - Does exact math on huge numbers without rounding errors
 - Figures out dates correctly, including leap years and "the last day of the month" edge cases everyone gets wrong
