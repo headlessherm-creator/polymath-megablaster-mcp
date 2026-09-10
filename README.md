@@ -2,7 +2,7 @@
 
 AI models are bad at math, unit conversions, and at least a dozen other things, Polymath MegaBlaster MCP blasts math, and is here to answer all your questions and be the solution to every single one of your problems.
 
-This is a local toolkit of 15 free tools that give AI agents a way to offload the kinds of computations reasoning models generally do not perform very well, computations are offloaded onto a deterministic calculator that does not use reasoning to produce a result. Deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source and built lean.
+This is a local toolkit of 15 free tools that give AI agents a way to offload the kinds of computations reasoning models generally do not perform very well, computations are offloaded onto a deterministic calculator that uses classic deterministic methods to ascertain needed values. Deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source and built lean.
 
 Every tool here exists because it fixes a specific, repeatable way models get math, dates, units, or counts wrong. See [`MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md`](https://github.com/headlessherm-creator/polymath-megablaster-mcp/blob/main/MCP_AND_AI_TOOL_OPPORTUNITY_RESEARCH.md) in this repo for the competitor research behind that decision — plenty of MCP servers already do JSON formatting, JWT decoding, hashing, and cron parsing well, so we don't duplicate that here.
 
