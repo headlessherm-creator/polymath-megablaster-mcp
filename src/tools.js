@@ -93,6 +93,13 @@ function isInRange(ipInt, cidr) {
   return (ipInt & mask) === (rangeInt & mask);
 }
 
+/**
+ * Classifies an IPv4 address against IANA/RFC reserved ranges (private,
+ * loopback, link-local, CGNAT, documentation, multicast, etc).
+ * @param {string} ip - dotted-quad IPv4 address, e.g. "192.168.1.1"
+ * @returns {{ip: string, isPrivate: boolean, matchedRange?: string, type: string}}
+ * @throws {Error} if ip is not a valid IPv4 address
+ */
 export function checkIpType(ip) {
   const ipInt = ipToInt(ip.trim());
   if (ipInt === null) throw new Error('Invalid IPv4 address');
@@ -366,6 +373,14 @@ export function permutations(n, r) {
   return { n, r, result: result.toString() };
 }
 
+/**
+ * Computes nCr — the number of ways to choose r unordered items from n,
+ * using exact BigInt arithmetic (no float64 overflow on large n/r).
+ * @param {number} n - total item count (non-negative integer)
+ * @param {number} r - number chosen (0 <= r <= n)
+ * @returns {{n: number, r: number, result: string}} result as a decimal string
+ * @throws {Error} if r > n, or either is negative
+ */
 export function combinations(n, r) {
   if (r > n || r < 0 || n < 0) throw new Error('Require 0 <= r <= n');
   const result = factorialBig(n) / (factorialBig(r) * factorialBig(n - r));
@@ -378,6 +393,15 @@ export function combinations(n, r) {
 
 const VALID_BASES = { binary: 2, decimal: 10, hex: 16, octal: 8 };
 
+/**
+ * Converts a number between decimal, hex, binary, and octal representations,
+ * using BigInt so arbitrarily large values are exact (no float64 rounding).
+ * @param {string|number} value - the number to convert, in fromBase
+ * @param {string} fromBase - one of: binary, decimal, hex, octal
+ * @param {string} toBase - one of: binary, decimal, hex, octal
+ * @returns {{value: string|number, fromBase: string, toBase: string, result: string}}
+ * @throws {Error} if fromBase/toBase is invalid, or value isn't valid in fromBase
+ */
 export function convertBase(value, fromBase, toBase) {
   const from = VALID_BASES[fromBase.toLowerCase()];
   const to = VALID_BASES[toBase.toLowerCase()];
@@ -387,12 +411,13 @@ export function convertBase(value, fromBase, toBase) {
   const cleaned = String(value).trim().replace(/^0x/i, '').replace(/^0b/i, '');
   let n;
   try {
-    n = BigInt(from === 10 ? cleaned : (from === 16 ? '0x' + cleaned : from === 2 ? '0b' + cleaned : parseInt(cleaned, 8).toString()));
+    if (from === 10) n = BigInt(cleaned);
+    else if (from === 16) n = BigInt('0x' + cleaned);
+    else if (from === 2) n = BigInt('0b' + cleaned);
+    else n = BigInt(parseInt(cleaned, 8)); // octal has no BigInt literal prefix
   } catch {
     throw new Error(`"${value}" is not a valid ${fromBase} number`);
   }
-  if (from === 8) n = BigInt(parseInt(cleaned, 8));
-  if (Number.isNaN(Number(n))) throw new Error(`"${value}" is not a valid ${fromBase} number`);
 
   const result = n.toString(to);
   return { value, fromBase, toBase, result };
