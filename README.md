@@ -94,6 +94,10 @@ MIT.
 
 4 additional tools (`hmac_text`, `compare_semver`, `aes_encrypt`, `aes_decrypt`) are available as a paid one-time unlock: **Polymath MegaBlaster Pro**. [Link to be added once the storefront is live.]
 
+## Agent Skill
+
+For Claude Code, the Agent SDK, or any client supporting the open [Agent Skills standard](https://code.claude.com/docs/en/skills): `skills/polymath-deterministic-math/SKILL.md` teaches the agent *when* to reach for this MCP server's tools instead of guessing — for exact math, date/timezone arithmetic, unit conversion, subnet math, string distance, geo distance, and token counting. Drop the `skills/polymath-deterministic-math/` folder into `.claude/skills/` (or your client's skills directory) alongside the MCP server config.
+
 ## Tags
 
 mcp, model-context-protocol, mcp-server, ai-agents, developer-tools, deterministic-computation, llm-tools, vibe-coding, local-first, offline-first, no-hallucination, exact-math, subnet-calculator, date-math, unit-converter
