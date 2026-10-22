@@ -1,31 +1,35 @@
-# Polymath MegaBlaster MCP
+# Polymath MegaBlaster MCP — Deterministic Math, Date, Unit Conversion & Networking Tools for AI Agents
 
-Local and open-weight models (Llama, Qwen, Mistral, etc.) are consistently bad at exact math, date arithmetic, unit conversion, and a dozen other deterministic tasks. (Frontier hosted models like Claude and GPT-4 handle most of this correctly unaided already — this tool is aimed at closing the gap for smaller/local models, not replacing what those already do well.)
+A free, local, 15-tool MCP server that gives AI agents exact, deterministic answers for math, date arithmetic, unit conversion, subnet/networking calculations, statistics, and token counting — no network calls, no API keys, no telemetry.
 
-This is a local toolkit of 15 free tools that give AI agents a way to offload the kinds of computations reasoning models generally do not perform very well, computations are offloaded onto a calculator that uses classical deterministic methods to ascertain needed values. Fully offline, deterministic and 100% local, no network calls, no telemetry, no API keys. Fully open source and built lean.
+If your AI agent is miscounting days between dates, rounding large numbers incorrectly, getting unit conversions slightly wrong, or messing up subnet/CIDR math, this MCP server exists specifically to fix that class of problem.
 
-**Useful things it does:**
-- Does exact math on huge numbers without rounding errors
-- Figures out dates correctly, including leap years and "the last day of the month" edge cases
-- Converts between units (km/miles, C/F, kg/lb) without approximating
-- Works out subnet math for networking
-- Computes distance between two coordinates (great-circle)
+## The problem this solves
 
-**More technical things it does:**
-- Arbitrary-precision arithmetic, factorials, permutations, combinations (avoids float64 overflow)
+Local and open-weight models (Llama, Qwen, Mistral, etc.) are consistently unreliable at exact math, date arithmetic, unit conversion, and similar deterministic tasks — they "reason" their way to an answer instead of computing it, and get it subtly wrong. (Frontier hosted models like Claude and GPT-4 already handle most of this correctly unaided — this toolkit is aimed at closing the gap for smaller/local models, not replacing what those already do well.) Every tool here uses classical deterministic methods instead of model reasoning, so the answer is always exactly right.
+
+**Everyday things it fixes:**
+- Exact math on huge numbers, no float rounding errors
+- Correct date math, including leap years and "last day of the month" edge cases
+- Unit conversion (km/miles, °C/°F, kg/lb) without approximation
+- Subnet/CIDR math for networking tasks
+- Great-circle distance between coordinates
+
+**More technical tools:**
+- Arbitrary-precision arithmetic, factorials, permutations, combinations (no float64 overflow)
 - Statistics (mean, median, stdev, variance, percentiles) on a list of numbers
 - Base conversion (decimal, hex, binary, octal)
 - Levenshtein edit distance and similarity ratio (deterministic fuzzy matching)
-- Time zone conversion (IANA zone aware)
-- Token counting (GPT tokenizer) so an agent can manage its own context budget
+- IANA-aware time zone conversion
+- GPT tokenizer-based token counting, so an agent can manage its own context budget
 
 ## Why local
 
-Most AI dev tool MCP servers either charge a subscription or call out to a remote API. This one never touches the network. Every tool is pure local computation, verifiable in the source: read `src/tools.js`, there is no `fetch` or `http` import anywhere in it.
+Most AI dev tool MCP servers either charge a subscription or call out to a remote API. This one never touches the network. Every tool is pure local computation, verifiable directly in the source: open `src/tools.js` — there is no `fetch` or `http` import anywhere in it.
 
 ## Setup
 
-**1. Install Node.js** (v18 or newer) if you don't have it: https://nodejs.org
+**1. Install Node.js** (v18+) if you don't have it: https://nodejs.org
 
 **2. Clone this repo and install dependencies:**
 
@@ -78,26 +82,10 @@ Add that to your MCP client's config and restart it. Setup docs for common clien
 
 All installed automatically by `npm install`. None of them make network calls at runtime.
 
-## Development
+## Keywords
 
-```
-npm install
-npm test        # unit tests on the core logic plus real MCP protocol integration tests
-node src/index.js   # run the server directly (waits on stdin)
-```
+deterministic math MCP server, MCP date calculator, MCP unit converter, subnet CIDR calculator MCP, local MCP server no API key, Claude MCP math tools, AI agent exact arithmetic, token counter MCP server.
 
 ## License
 
-MIT.
-
-## Pro features
-
-4 additional tools (`hmac_text`, `compare_semver`, `aes_encrypt`, `aes_decrypt`) are available as a paid one-time unlock: **Polymath MegaBlaster Pro**. [Link to be added once the storefront is live.]
-
-## Agent Skill
-
-For Claude Code, the Agent SDK, or any client supporting the open [Agent Skills standard](https://code.claude.com/docs/en/skills): `skills/polymath-deterministic-math/SKILL.md` teaches the agent *when* to reach for this MCP server's tools instead of guessing — for exact math, date/timezone arithmetic, unit conversion, subnet math, string distance, geo distance, and token counting. Drop the `skills/polymath-deterministic-math/` folder into `.claude/skills/` (or your client's skills directory) alongside the MCP server config.
-
-## Tags
-
-mcp, model-context-protocol, mcp-server, ai-agents, developer-tools, deterministic-computation, llm-tools, vibe-coding, local-first, offline-first, no-hallucination, exact-math, subnet-calculator, date-math, unit-converter
+MIT
