@@ -86,6 +86,12 @@ All installed automatically by `npm install`. None of them make network calls at
 
 deterministic math MCP server, MCP date calculator, MCP unit converter, subnet CIDR calculator MCP, local MCP server no API key, Claude MCP math tools, AI agent exact arithmetic, token counter MCP server.
 
+## Related tools
+
+Same local-first philosophy, different problems:
+- [json-mender-mcp](https://github.com/headlessherm-creator/json-mender-mcp) — fix malformed JSON, validate JSON Schema, test regex
+- [hiring-mender-mcp](https://github.com/headlessherm-creator/hiring-mender-mcp) — BambooHR + Greenhouse ATS write tools, one vocabulary
+
 ## License
 
 MIT
