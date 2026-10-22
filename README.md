@@ -91,6 +91,7 @@ deterministic math MCP server, MCP date calculator, MCP unit converter, subnet C
 Same local-first philosophy, different problems:
 - [json-mender-mcp](https://github.com/headlessherm-creator/json-mender-mcp) — fix malformed JSON, validate JSON Schema, test regex
 - [hiring-mender-mcp](https://github.com/headlessherm-creator/hiring-mender-mcp) — BambooHR + Greenhouse ATS write tools, one vocabulary
+- [helpdesk-mender-mcp](https://github.com/headlessherm-creator/helpdesk-mender-mcp) — Zendesk + Freshdesk + Help Scout write tools, one vocabulary
 
 ## License
 
