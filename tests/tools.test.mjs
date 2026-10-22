@@ -116,5 +116,16 @@ eq(t.levenshteinDistance('kitten', 'sitting').distance, 3, 'levenshtein kitten/s
 eq(t.levenshteinDistance('same', 'same').distance, 0, 'levenshtein identical strings is 0');
 eq(t.levenshteinDistance('', 'abc').distance, 3, 'levenshtein empty string vs abc is 3');
 
+// UUID generation
+r = t.generateUuid(1);
+eq(r.count, 1, 'generate_uuid default count is 1');
+ok(r.uuids.length === 1, 'generate_uuid returns 1 uuid');
+ok(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(r.uuids[0]), 'generate_uuid returns valid v4 format');
+r = t.generateUuid(5);
+eq(r.uuids.length, 5, 'generate_uuid honors count');
+ok(new Set(r.uuids).size === 5, 'generate_uuid produces distinct values');
+throws(() => t.generateUuid(0), 'generate_uuid rejects count below 1');
+throws(() => t.generateUuid(101), 'generate_uuid rejects count above 100');
+
 console.log('\n---- Result:', failed === 0 ? 'ALL PASS' : failed + ' FAILED', '(' + (failed === 0 ? 'ready' : 'NOT ready') + ') ----');
 process.exit(failed === 0 ? 0 : 1);

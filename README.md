@@ -1,6 +1,6 @@
 # Polymath MegaBlaster MCP — Deterministic Math, Date, Unit Conversion & Networking Tools for AI Agents
 
-A free, local, 15-tool MCP server that gives AI agents exact, deterministic answers for math, date arithmetic, unit conversion, subnet/networking calculations, statistics, and token counting — no network calls, no API keys, no telemetry.
+A free, local, 16-tool MCP server that gives AI agents exact, deterministic answers for math, date arithmetic, unit conversion, subnet/networking calculations, statistics, token counting, and real random UUID generation — no network calls, no API keys, no telemetry.
 
 If your AI agent is miscounting days between dates, rounding large numbers incorrectly, getting unit conversions slightly wrong, or messing up subnet/CIDR math, this MCP server exists specifically to fix that class of problem.
 
@@ -22,6 +22,7 @@ Local and open-weight models (Llama, Qwen, Mistral, etc.) are consistently unrel
 - Levenshtein edit distance and similarity ratio (deterministic fuzzy matching)
 - IANA-aware time zone conversion
 - GPT tokenizer-based token counting, so an agent can manage its own context budget
+- Real cryptographically-random UUID (v4) generation — LLMs reliably fabricate plausible-looking but non-random, potentially colliding UUID strings instead
 
 ## Why local
 
@@ -57,7 +58,7 @@ Add that to your MCP client's config and restart it. Setup docs for common clien
 - Cursor: https://docs.cursor.com/context/model-context-protocol
 - Claude Code: https://docs.claude.com/en/docs/claude-code/mcp
 
-## Tools (15, all free)
+## Tools (16, all free)
 
 - **Deterministic math**: `calculate` (arbitrary-precision expression evaluator),
   `factorial`, `permutations`, `combinations` (all arbitrary-precision, avoid float64
@@ -71,7 +72,7 @@ Add that to your MCP client's config and restart it. Setup docs for common clien
 - **Text**: `levenshtein_distance` (exact edit distance and similarity ratio)
 - **Geo**: `haversine_distance` (exact great-circle distance between coordinates)
 - **Agent utility**: `count_tokens` (GPT tokenizer, for managing context budget before
-  a large prompt)
+  a large prompt), `generate_uuid` (real cryptographically-random v4 UUIDs, 1-100 at a time)
 
 ## Dependencies
 

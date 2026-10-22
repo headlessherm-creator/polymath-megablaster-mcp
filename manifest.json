@@ -1,0 +1,24 @@
+{
+  "manifest_version": "0.3",
+  "name": "polymath-megablaster-mcp",
+  "display_name": "Polymath MegaBlaster",
+  "version": "3.0.6",
+  "description": "Deterministic math, date, unit conversion, and networking tools for AI agents. 15 free tools, 100% local, no API keys, no telemetry.",
+  "author": {
+    "name": "headless108"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/headlessherm-creator/polymath-megablaster-mcp"
+  },
+  "license": "MIT",
+  "keywords": ["math", "deterministic", "date", "unit-conversion", "networking", "statistics", "local", "offline"],
+  "server": {
+    "type": "node",
+    "entry_point": "src/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/src/index.js"]
+    }
+  }
+}

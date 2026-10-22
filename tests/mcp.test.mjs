@@ -30,8 +30,9 @@ async function call(name, args, checkFn, label) {
 
 await call('calc_subnet', { cidr: '192.168.1.0/24' }, (t) => t.includes('192.168.1.255'), 'MCP call: calc_subnet broadcast');
 await call('check_ip_type', { ip: '10.0.0.1' }, (t) => t.includes('true'), 'MCP call: check_ip_type private');
-// format_json / generate_uuid / hash_text / convert_config_format / parse_cron
+// format_json / hash_text / convert_config_format / parse_cron
 // MCP-layer tests removed with the v2 scope audit; those tools left the free tier.
+// (generate_uuid was reinstated in v3.1.0 — see tools.js for rationale.)
 await call('calc_subnet', { cidr: 'not-an-ip' }, (t, isErr) => isErr, 'MCP call: calc_subnet bad input returns clean error');
 
 await call('calculate', { expression: '999999999999 * 999999999999' }, (t) => t.includes('999999999998000000000001'), 'MCP call: calculate large exact multiplication');
@@ -46,6 +47,7 @@ await call('factorial', { n: 20 }, (t) => t.includes('2432902008176640000'), 'MC
 await call('combinations', { n: 52, r: 5 }, (t) => t.includes('2598960'), 'MCP call: combinations poker hands');
 await call('convert_base', { value: '255', fromBase: 'decimal', toBase: 'hex' }, (t) => t.includes('ff'), 'MCP call: convert_base decimal to hex');
 await call('levenshtein_distance', { a: 'kitten', b: 'sitting' }, (t) => t.includes('"distance": 3'), 'MCP call: levenshtein_distance');
+await call('generate_uuid', { count: 3 }, (t) => (t.match(/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi) || []).length === 3, 'MCP call: generate_uuid returns 3 valid v4 uuids');
 
 console.log('\n---- MCP integration result:', failed === 0 ? 'ALL PASS' : failed + ' FAILED', '----');
 await client.close();

@@ -104,6 +104,10 @@ tool('levenshtein_distance', 'Compute exact edit distance and similarity ratio b
   a: z.string(), b: z.string(),
 }, ({ a, b }) => t.levenshteinDistance(a, b));
 
+tool('generate_uuid', 'Generate real cryptographically-random UUIDs (v4). Fixes LLMs fabricating plausible-looking but non-random, potentially colliding UUID strings instead of real random ones.', {
+  count: z.number().int().min(1).max(100).optional().describe('How many UUIDs to generate (1-100, default 1)'),
+}, ({ count }) => t.generateUuid(count ?? 1));
+
 const transport = new StdioServerTransport();
 await server.connect(transport);
 console.error('polymath-megablaster-mcp running on stdio (fully open source, all tools free)');

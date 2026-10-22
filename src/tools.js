@@ -424,8 +424,17 @@ export function convertBase(value, fromBase, toBase) {
 }
 
 // ============================================================
-// NEW: Levenshtein distance / string similarity (deterministic fuzzy matching)
+// NEW: UUID generation (fixes LLMs fabricating plausible-looking,
+// non-random, potentially colliding UUIDs instead of real random ones)
 // ============================================================
+
+import { randomUUID } from 'node:crypto';
+
+export function generateUuid(count = 1) {
+  const n = parseInt(count, 10);
+  if (Number.isNaN(n) || n < 1 || n > 100) throw new Error('count must be an integer between 1 and 100');
+  return { count: n, uuids: Array.from({ length: n }, () => randomUUID()) };
+}
 
 export function levenshteinDistance(a, b) {
   const m = a.length, n = b.length;
